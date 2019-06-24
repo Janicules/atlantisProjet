@@ -1,0 +1,7 @@
+{
+  "name": "atlantis",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
