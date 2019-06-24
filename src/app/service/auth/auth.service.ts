@@ -30,23 +30,6 @@ export class AuthService {
     this.isLoggedIn$.next(loggedIn);
   }
 
-  // Appel API
-  call(path) {
-    return new Promise(resolve => {
-      var link = this.BASE_URL + path;
-
-      this.http.get(link)
-        .subscribe(data => {
-          this.data = data.text();
-          console.log("data", this.data);
-          resolve(this.data);
-        }, error => {
-          console.log("link", link);
-          console.log("erreur API : " + error);
-        });
-    });
-  }
-
   public login(): void {
     this.auth0.authorize();
   }
