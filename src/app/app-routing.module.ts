@@ -6,8 +6,7 @@ import { DevicesListComponent } from './component/devices-list/devices-list.comp
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'callback', component: CallbackComponent },
+  { path: 'login', component: CallbackComponent },
   { path: 'list', component: DevicesListComponent }
 ];
 @NgModule({

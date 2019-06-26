@@ -2,7 +2,7 @@
 
 platform :ios, '9.0'
 
-target 'MyApp' do
-	project 'MyApp.xcodeproj'
+target 'Atlantis Project' do
+	project 'Atlantis Project.xcodeproj'
 
 end

@@ -872,8 +872,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var routes = [
     { path: '', component: _component_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
-    { path: 'login', component: _component_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
-    { path: 'callback', component: _component_callback_callback_component__WEBPACK_IMPORTED_MODULE_4__["CallbackComponent"] },
+    { path: 'login', component: _component_callback_callback_component__WEBPACK_IMPORTED_MODULE_4__["CallbackComponent"] },
     { path: 'list', component: _component_devices_list_devices_list_component__WEBPACK_IMPORTED_MODULE_5__["DevicesListComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -920,21 +919,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
-/* harmony import */ var _service_auth_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./service/auth/auth.service */ "./src/app/service/auth/auth.service.ts");
-
 
 
 
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar, authService) {
+    function AppComponent(platform, splashScreen, statusBar) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
-        this.authService = authService;
         this.initializeApp();
-        this.authService.handleAuthentication();
     }
     AppComponent.prototype.initializeApp = function () {
         var _this = this;
@@ -950,8 +945,7 @@ var AppComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
-            _service_auth_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]])
+            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -980,10 +974,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _component_login_login_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./component/login/login.component */ "./src/app/component/login/login.component.ts");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
-/* harmony import */ var _pipes_pipes_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pipes/pipes.module */ "./src/app/pipes/pipes.module.ts");
-/* harmony import */ var _component_callback_callback_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./component/callback/callback.component */ "./src/app/component/callback/callback.component.ts");
-/* harmony import */ var _component_devices_list_devices_list_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./component/devices-list/devices-list.component */ "./src/app/component/devices-list/devices-list.component.ts");
+/* harmony import */ var _pipes_pipes_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pipes/pipes.module */ "./src/app/pipes/pipes.module.ts");
+/* harmony import */ var _component_callback_callback_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./component/callback/callback.component */ "./src/app/component/callback/callback.component.ts");
+/* harmony import */ var _component_devices_list_devices_list_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./component/devices-list/devices-list.component */ "./src/app/component/devices-list/devices-list.component.ts");
+/* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _service_api_api_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./service/api/api.service */ "./src/app/service/api/api.service.ts");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+
+
+
 
 
 
@@ -1006,20 +1006,23 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
                 _component_login_login_component__WEBPACK_IMPORTED_MODULE_9__["LoginComponent"],
-                _component_callback_callback_component__WEBPACK_IMPORTED_MODULE_12__["CallbackComponent"],
-                _component_devices_list_devices_list_component__WEBPACK_IMPORTED_MODULE_13__["DevicesListComponent"]
+                _component_callback_callback_component__WEBPACK_IMPORTED_MODULE_11__["CallbackComponent"],
+                _component_devices_list_devices_list_component__WEBPACK_IMPORTED_MODULE_12__["DevicesListComponent"]
             ],
             entryComponents: [],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(),
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"],
-                _angular_http__WEBPACK_IMPORTED_MODULE_10__["HttpModule"],
-                _pipes_pipes_module__WEBPACK_IMPORTED_MODULE_11__["AppPipesModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"],
+                _angular_http__WEBPACK_IMPORTED_MODULE_16__["HttpModule"],
+                _pipes_pipes_module__WEBPACK_IMPORTED_MODULE_10__["AppPipesModule"],
             ],
             providers: [
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
+                _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_13__["InAppBrowser"],
+                _service_api_api_service__WEBPACK_IMPORTED_MODULE_15__["ApiService"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
@@ -1300,6 +1303,58 @@ var AppPipesModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/service/api/api.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/service/api/api.service.ts ***!
+  \********************************************/
+/*! exports provided: ApiService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiService", function() { return ApiService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+
+
+
+/*
+  Generated class for the ApiService provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+var ApiService = /** @class */ (function () {
+    function ApiService(http) {
+        this.http = http;
+        this.BASE_URL = "http://film-matou.arredondo-m.ovh/mobileProject/";
+    }
+    // Appel API
+    ApiService.prototype.get = function (path) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            var link = _this.BASE_URL + path;
+            _this.http.get(link)
+                .subscribe(function (data) {
+                _this.data = data.json();
+                resolve(_this.data);
+            }, function (error) {
+                console.log("erreur API : " + error);
+            });
+        });
+    };
+    ApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"]])
+    ], ApiService);
+    return ApiService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/service/auth/auth.service.ts":
 /*!**********************************************!*\
   !*** ./src/app/service/auth/auth.service.ts ***!
@@ -1312,99 +1367,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var auth0_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! auth0-js */ "./node_modules/auth0-js/dist/auth0.min.esm.js");
-
-
+/* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
+/* harmony import */ var _api_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../api/api.service */ "./src/app/service/api/api.service.ts");
 
 
 
 
 var AuthService = /** @class */ (function () {
-    function AuthService(http, router) {
-        this.http = http;
-        this.router = router;
-        this.isLoggedIn$ = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
-        this.isLoggedIn = false;
-        this.auth0 = new auth0_js__WEBPACK_IMPORTED_MODULE_5__["WebAuth"]({
-            clientID: 'B2sSoMdmqo4PgIuq6aDf58gmJ60q6qDt',
-            domain: 'dev-0wqacfgb.eu.auth0.com',
-            responseType: 'token id_token',
-            audience: 'https://dev-0wqacfgb.eu.auth0.com/userinfo',
-            redirectUri: 'http://localhost:8100/callback',
-            scope: 'openid'
-        });
-        this.BASE_URL = "https://atlantisproject.b2clogin.com/atlantisproject.onmicrosoft.com/";
-        // Check if user is logged In when Initializing
-        var loggedIn = this.isLoggedIn = this.isAuthenticated();
-        this.isLoggedIn$.next(loggedIn);
+    function AuthService(inAB, apiService) {
+        this.inAB = inAB;
+        this.apiService = apiService;
+        this.clientId = "27fb84fe-4baf-4b6b-bfe7-f2d0638f2790";
+        this.clientSecret = "Zg2^04#WjA#h%6Q{]eK53J&`";
+        this.tenant = "atlantisproject.onmicrosoft.com";
+        this.redirectUri = "http://localhost:8090/login";
+        this.options = {
+            hideurlbar: "yes",
+            toolbar: "no",
+            location: "no"
+        };
     }
-    // Appel API
-    AuthService.prototype.call = function (path) {
-        var _this = this;
-        return new Promise(function (resolve) {
-            var link = _this.BASE_URL + path;
-            _this.http.get(link)
-                .subscribe(function (data) {
-                _this.data = data.text();
-                console.log("data", _this.data);
-                resolve(_this.data);
-            }, function (error) {
-                console.log("link", link);
-                console.log("erreur API : " + error);
-            });
-        });
-    };
     AuthService.prototype.login = function () {
-        this.auth0.authorize();
-    };
-    AuthService.prototype.handleAuthentication = function () {
         var _this = this;
-        this.auth0.parseHash(function (err, authResult) {
-            if (authResult && authResult.accessToken && authResult.idToken) {
-                window.location.hash = '';
-                _this.setSession(authResult);
-                var loggedIn = _this.isLoggedIn = true;
-                _this.isLoggedIn$.next(loggedIn);
-                _this.router.navigate(['/home']);
-            }
-            else if (err) {
-                var loggedIn = _this.isLoggedIn = false;
-                _this.isLoggedIn$.next(loggedIn);
-                _this.router.navigate(['/home']);
+        var browser = this.inAB.create("https://atlantisproject.b2clogin.com/" + this.tenant + "/oauth2/v2.0/authorize?client_id=" + this.clientId + "&response_type=code&redirect_uri=" + this.redirectUri + "&response_mode=query&scope=openid&state=data&p=B2C_1_SignUporSignIn", "_blank", this.options);
+        browser.on('loadstart').subscribe(function (event) {
+            if ((event.url).indexOf(_this.redirectUri) === 0) {
+                var responseParameters = ((event.url).split("?")[1]).split("&");
+                var parsedResponse = {};
+                for (var i = 0; i < responseParameters.length; i++) {
+                    parsedResponse[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+                }
+                if (parsedResponse["code"] !== undefined && parsedResponse["code"] !== null) {
+                    console.log("code", parsedResponse['code']);
+                    _this.apiService.get("postData.php?code=" + parsedResponse['code'])
+                        .then(function (res) {
+                        res = atob(res['id_token'].split(".")[1]);
+                        console.log("res", res['family_name'], "1");
+                        console.log("resssssss", res);
+                        var data = JSON.parse(String(res));
+                        console.log("data", data['family_name'], "2");
+                    }, function (err) {
+                        console.log("err", err);
+                    })
+                        .catch(function (rej) {
+                        console.log("rej", rej);
+                    });
+                }
+                browser.close();
             }
         });
-    };
-    AuthService.prototype.setSession = function (authResult) {
-        // Set the time that the Access Token will expire at
-        var expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-        localStorage.setItem('access_token', authResult.accessToken);
-        localStorage.setItem('id_token', authResult.idToken);
-        localStorage.setItem('expires_at', expiresAt);
-    };
-    AuthService.prototype.logout = function () {
-        // Remove tokens and expiry time from localStorage
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('id_token');
-        localStorage.removeItem('expires_at');
-        // Go back to the home route
-        var loggedIn = this.isLoggedIn = false;
-        this.isLoggedIn$.next(loggedIn);
-        window.location.href = "https://dev-0wqacfgb.eu.auth0.com/v2/logout?returnTo=http://localhost:8100";
-    };
-    AuthService.prototype.isAuthenticated = function () {
-        // Check whether the current time is past the
-        // Access Token's expiry time
-        var expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
-        return new Date().getTime() < expiresAt;
     };
     AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_2__["InAppBrowser"],
+            _api_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]])
     ], AuthService);
     return AuthService;
 }());

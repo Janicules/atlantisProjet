@@ -11,10 +11,14 @@ import { AppComponent } from './app.component';
 
 
 import { LoginComponent } from './component/login/login.component';
-import { HttpModule } from '@angular/http';
 import { AppPipesModule } from './pipes/pipes.module';
 import { CallbackComponent } from './component/callback/callback.component';
 import { DevicesListComponent } from './component/devices-list/devices-list.component';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiService } from './service/api/api.service';
+import { HttpModule } from '@angular/http';
+import { AppService } from './service/app/app.service';
 
 @NgModule({
   declarations: [
@@ -28,12 +32,16 @@ import { DevicesListComponent } from './component/devices-list/devices-list.comp
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
+    HttpClientModule,
     HttpModule,
     AppPipesModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    InAppBrowser,
+    ApiService,
+    AppService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

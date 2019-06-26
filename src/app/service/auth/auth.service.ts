@@ -1,79 +1,68 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
+import { ApiService } from '../api/api.service';
 import { Http } from '@angular/http';
-import {Router} from '@angular/router';
-import {Subject} from 'rxjs';
-import * as auth0 from 'auth0-js';
+import { AppService } from '../app/app.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private BASE_URL;
   data: any;
 
-  isLoggedIn$ = new Subject();
-  isLoggedIn: Boolean = false;
-  auth0 = new auth0.WebAuth({
-    clientID: 'B2sSoMdmqo4PgIuq6aDf58gmJ60q6qDt',
-    domain: 'dev-0wqacfgb.eu.auth0.com',
-    responseType: 'token id_token',
-    audience: 'https://dev-0wqacfgb.eu.auth0.com/userinfo',
-    redirectUri: 'http://localhost:8100/callback',
-    scope: 'openid'
-  });
+  clientId: string = "27fb84fe-4baf-4b6b-bfe7-f2d0638f2790";
+  clientSecret: string = "Zg2^04#WjA#h%6Q{]eK53J&`";
+  tenant: string = "atlantisproject.onmicrosoft.com";
+  redirectUri: string = "http://localhost:8090/login";
 
-  constructor(private http: Http, private router: Router) {
-    this.BASE_URL = "https://atlantisproject.b2clogin.com/atlantisproject.onmicrosoft.com/";
+  options: InAppBrowserOptions = {
+    hideurlbar: "yes",
+    toolbar: "no",
+    location: "no"
+  }
 
-    // Check if user is logged In when Initializing
-    const loggedIn = this.isLoggedIn = this.isAuthenticated();
-    this.isLoggedIn$.next(loggedIn);
+  constructor(
+    private inAB: InAppBrowser,
+    private apiService: ApiService,
+    private appService: AppService
+  ) {
   }
 
   public login(): void {
-    this.auth0.authorize();
-  }
+    const browser = this.inAB.create("https://atlantisproject.b2clogin.com/" + this.tenant + "/oauth2/v2.0/authorize?client_id=" + this.clientId + "&response_type=code&redirect_uri=" + this.redirectUri + "&response_mode=query&scope=openid&state=data&p=B2C_1_SignUporSignIn", "_blank", this.options);
+    browser.on('loadstart').subscribe(event => {
+      if ((event.url).indexOf(this.redirectUri) === 0) {
+        let responseParameters = ((event.url).split("?")[1]).split("&");
+        let parsedResponse = {};
 
-  public handleAuthentication(): void {
-    this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
-        this.setSession(authResult);
-        const loggedIn = this.isLoggedIn = true;
-        this.isLoggedIn$.next(loggedIn);
-        this.router.navigate(['/home']);
-      } else if (err) {
-        const loggedIn = this.isLoggedIn = false;
-        this.isLoggedIn$.next(loggedIn);
-        this.router.navigate(['/home']);
+        for (let i = 0; i < responseParameters.length; i++) {
+          parsedResponse[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+        }
+
+        if (parsedResponse["code"] !== undefined && parsedResponse["code"] !== null) {
+
+          this.apiService.get("postData.php?code=" + parsedResponse['code'])
+            .then(
+              res => {
+                res = atob(res['id_token'].split(".")[1]);
+                this.appService.user = JSON.parse(String(res));
+              },
+              err => {
+                console.error("error", err);
+              }
+            )
+            .catch(
+              rej => {
+                console.error("reject", rej);
+              }
+            )
+
+        }
+
+        browser.close();
       }
     });
-  }
-
-  private setSession(authResult): void {
-    // Set the time that the Access Token will expire at
-    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-    localStorage.setItem('access_token', authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('expires_at', expiresAt);
-  }
-
-  public logout(): void {
-    // Remove tokens and expiry time from localStorage
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    // Go back to the home route
-    const loggedIn = this.isLoggedIn = false;
-    this.isLoggedIn$.next(loggedIn);
-
-    window.location.href = "https://dev-0wqacfgb.eu.auth0.com/v2/logout?returnTo=http://localhost:8100"
-  }
-
-  public isAuthenticated(): boolean {
-    // Check whether the current time is past the
-    // Access Token's expiry time
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
-    return new Date().getTime() < expiresAt;
   }
 }
